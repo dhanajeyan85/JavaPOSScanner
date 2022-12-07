@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+    <RollingFile name="RollingFile" filename="${env:TEMP}/jposTraceR.log"
+                 filePattern="${env:TEMP}/jposTraceR-%i.log">
+        <PatternLayout>
+            <pattern>%d{DEFAULT} [%t] %-5level %c{1} - %msg %throwable{short.localizedMessage}%n</pattern>
+        </PatternLayout>
+        <Policies>
+            <OnStartupTriggeringPolicy />
+            <SizeBasedTriggeringPolicy size="20 MB" />
+        </Policies>
+        <DefaultRolloverStrategy max="5" fileIndex="min"/>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Root level="debug">
+      <AppenderRef ref="RollingFile" />
+    </Root>
+  </Loggers>
+</Configuration>
